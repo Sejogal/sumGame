@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sumgame</title>
+</head>
+<style>
+    * {
+        text-align: center;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        margin: 0;
+        box-sizing: border-box;
+        padding: 0%;
+    }
+
+    body {
+        background-image: linear-gradient(90deg, black, blue);
+        margin-top: 10%;
+    }
+
+    h1 {
+        font-size: 60px;
+        color: white;
+        font-weight: b
+    }
+
+    input {
+        background-color: rgb(181, 214, 181);
+        border-radius: 3rem;
+        width: 300px;
+        height: 20px;
+        transition: height 1s ease 1s;
+    }
+
+    input:hover {
+        height: 50px;
+    }
+
+    button {
+        background-color: green;
+        border: none;
+        border-radius: 4px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .tela {
+        color: white;
+    }
+
+    #ponto {
+        color: green;
+        font-size: 30px;
+    }
+    .iconI {
+        width: 7%;
+    }
+
+    .iconL {
+        width: 3.5%;
+    }
+
+    footer {
+        height: 100%;
+        position: fixed;
+        top: 70%;
+        text-align: center;
+        justify-content: center;
+    }
+    /*footer a  img{
+
+    }*/
+</style>
+
+<body>
+    <div class="view">
+        <h1>+ sumGame +</h1>
+        <h2 id="tela" class="tela">BEM VINDO!</h2><br>
+        <input placeholder="Digite o resultado" type="number" id="resposta">
+        <button id="btn">Ir</button> <br>
+        <p id="paragraph"></p>
+        <p id="ponto">Pontos: 0</p>
+    </div>
+    <footer>
+        <a href="https://www.instagram.com/sejogal_oficial/?utm_source=ig_web_button_share_sheet" target="_blank"><img
+            src="https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/Instagram_Logo_png.png" alt=""
+            class="iconI"></a>
+    <a href="https://www.linkedin.com/in/seth-lussueki-5714b92b8" target="_blank"><img class="iconL"
+            src="https://freelogopng.com/images/all_img/1656996524linkedin-app-icon.png" alt=""></a>
+    </footer>
+    <script>
+        let pontos = 0; // Variável para armazenar a pontuação
+        let jogoAtivo = false; // Controle para evitar cliques extras
+        let soma = 0; // Armazena o valor correto da soma
+
+        setTimeout(function () {
+            document.querySelector('.tela').innerHTML = "PREPARADO ?";
+        }, 2000);
+        setTimeout(function () {
+            document.querySelector('.tela').innerHTML = "CERTEZA ?";
+        }, 5000);
+        setTimeout(function () {
+            document.querySelector('.tela').innerHTML = "O PRIMEIRO ACERTO NÃO VALE :)";
+        }, 6000);
+        setTimeout(function () {
+            document.querySelector('.tela').innerHTML = "SÓ OS FRACOS PEGAM CALCULADORA KK";
+        }, 8000);
+        setTimeout(function () {
+            document.querySelector('.tela').innerHTML = "CONCENTRATE...";
+        }, 11000);
+        setTimeout(function () {
+            document.querySelector('.tela').innerHTML = "VAI!!";
+        }, 14000);
+
+        function jogo() {
+            if (!jogoAtivo) {
+                const a = Math.floor(Math.random() * 20) + 100;
+                const b = Math.floor(Math.random() * 200) + 100;
+                soma = a + b; // Atualiza a soma correta
+                document.querySelector('.tela').innerHTML = a + " + " + b;
+                jogoAtivo = true; // Habilita o jogo para aceitar cliques
+            }
+        }
+
+        document.getElementById("btn").addEventListener('click', function () {
+            if (jogoAtivo) { // Só aceita cliques se o jogo estiver ativo
+                const resp = parseInt(document.getElementById("resposta").value);
+                if (resp === soma) {
+                    pontos++; // Incrementa a pontuação
+                    document.getElementById("paragraph").innerHTML = "Acertou!";
+                    document.getElementById("ponto").innerHTML = "Pontos: " + pontos;
+                } else {
+                    document.getElementById("paragraph").innerHTML = "Errou!";
+                }
+                document.getElementById("resposta").value = ""; // Limpa o campo de entrada
+                jogoAtivo = false; // Desativa o jogo até que um novo cálculo seja gerado
+            } else {
+                alert("Aguarde o próximo cálculo!")
+            }
+        });
+
+        const timeOver = setInterval(jogo, 15000);
+    </script>
+</body>
+
+</html>
